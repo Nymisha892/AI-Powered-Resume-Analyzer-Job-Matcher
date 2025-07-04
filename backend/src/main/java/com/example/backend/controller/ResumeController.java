@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api/resume")
 public class ResumeController {
 
