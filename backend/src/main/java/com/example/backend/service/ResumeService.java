@@ -27,7 +27,7 @@ public class ResumeService {
     private AIClientService aiClientService;
 
 
-    public String saveFileToDisk(MultipartFile file, String userId) throws IOException {
+    public Resume saveFileToDisk(MultipartFile file, String userId) throws IOException {
 //        if (file.isEmpty() || !file.getOriginalFilename().endsWith(".pdf")) {
 //            throw new IllegalArgumentException("Only PDF files are allowed.");
 //        }
@@ -67,28 +67,8 @@ public class ResumeService {
         // Save to MongoDB
         resumeRepo.save(resume);
 
-        return originalFilename;
+        return resume;
     }
 
-    public String saveResumeAndAnalysis(MultipartFile file, String userId) throws IOException {
-        // Save file locally
-        String fileName = saveFileToDisk(file,userId);
 
-        // Call Python AI service
-        Map<String, Object> aiData = aiClientService.analyzeResume((MultipartFile) new File("uploads/" + fileName));
-
-        // Parse AI response
-        List<String> skills = (List<String>) aiData.get("skills");
-        String role = (String) aiData.get("suggested_role");
-
-        Resume resume = new Resume();
-        resume.setFilename(fileName);
-        resume.setUserId(userId);
-        resume.setUploadedAt(new Date());
-        resume.setExtractedSkills(skills);
-        resume.setSuggestedRole(role);
-
-        resumeRepo.save(resume);
-        return fileName;
-    }
 }
