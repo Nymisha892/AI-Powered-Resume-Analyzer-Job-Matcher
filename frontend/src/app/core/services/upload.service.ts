@@ -8,9 +8,16 @@ export class UploadService {
 
   constructor(private http: HttpClient) {}
 
-  uploadResume(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
+  uploadResume(formData: FormData): Observable<any> {
+    // const formData = new FormData();
+    // formData.append('file', file);
+    // formData.append('userid',"1");
     return this.http.post(`${this.baseUrl}/upload`, formData);
   }
+
+  getMatchingJobs(resumeId: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/match-jobs/${resumeId}`);
+}
+
+
 }

@@ -1,7 +1,28 @@
-<div class="upload-container">
+<div class="upload-container" style="text-align: center; margin: 3% 0% 0% 0%;">
   <h2>Upload Your Resume</h2>
   <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
   <button mat-raised-button color="primary" (click)="upload()">Upload</button>
 
   <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</div>
+
+
+<div *ngIf="extractedSkills.length > 0">
+  <h3>Extracted Skills:</h3>
+  <mat-chip-list>
+    <mat-chip *ngFor="let skill of extractedSkills">{{ skill }}</mat-chip>
+  </mat-chip-list>
+
+  <h4>Suggested Role: {{ suggestedRole }}</h4>
+</div>
+
+<div *ngIf="matchedJobs">
+  <h3>Matched Jobs:</h3>
+  <mat-card *ngFor="let job of matchedJobs" class="job-card">
+    <mat-card-title>{{ job.title }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ job.description }}</p>
+      <p><strong>Required Skills:</strong> {{ job.requiredSkills.join(', ') }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -17,6 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadComponent } from './components/upload/upload.component';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,9 @@ import { UploadComponent } from './components/upload/upload.component';
     MatSnackBarModule,
     MatToolbarModule,
     MatProgressBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
